@@ -1,5 +1,6 @@
 const { Usuario } = require("../model/model")
 const { generarJWT,emailRegistro, generarToken  } = require("../helpers/index");
+const colors = require('colors')
 
 const traerUsuarios = async (req, res) => {
     const registros = await Usuario.findAll()
@@ -16,7 +17,7 @@ const loginUsuario = async (req, res) => {
     
       const usuario = await Usuario.findOne({where : {correo: correo}})
  
-          // console.log(colors.bgBlue(usuario.id))
+        console.log(colors.bgBlue(usuario))
         if ( !usuario ) {
             return res.status(400).json({
                 msg: 'El Usuario no es correcto'
