@@ -1,19 +1,19 @@
-const express = require('express')
-const sequelize = require("./backend/db/db")
-const colors = require("colors")
-const path = require("path");
-const bodyParser = require('body-parser')
+require('dotenv').config()
 
-const post = require("./backend/routes/index")
+const express = require('express')
+const fileUpload = require('express-fileupload')
+const colors = require("colors")
+
+const sequelize = require("./backend/db/db")
+const path = require("path");
 
 const app = express()
 const port = process.env.PORT | 3000
 
-require('dotenv').config()
+const auth = require("./backend/routes/auth")
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "./backend/views"));
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false})); // Para que funcionen los formularios
@@ -32,8 +32,11 @@ const conectarBD = async () => {
 
 conectarBD();
 
-// Solo me funciono de esta forma
+
 app.use('/', express.static('public/'))
+app.use("/auth", auth)
+
+
 
 app.listen(port, () => {
   console.log(colors.bgYellow(`Corriendo en puerto: ${port}`))
