@@ -23,14 +23,14 @@ const loginUsuario = async (req, res) => {
             });
         }
 
-      const tokenSesion = await generarJWT();
-             await usuario.save()
-             res.status(200).header("auth-token", tokenSesion).json({
-                nombre:  usuario.nombre,
+        const tokenSesion = await generarJWT();
+        console.log(tokenSesion)
+        await usuario.save()
+        res.status(200).header("auth-token", tokenSesion).json({
                 usuario:  usuario.nombre,
                 correo: usuario.correo,
                 token: tokenSesion
-              })
+        })
    
     } catch (error) {
 
@@ -47,7 +47,6 @@ const indexPlantilla = async (req, res) => {
     try {
         const user = await Usuario.findOne({ where: { usuario }})
         console.log(user)
-          //console.log(colors.bgBlue(arrayRegistros))
           if(user) {
 
             res.status(200).render("indexUser", {

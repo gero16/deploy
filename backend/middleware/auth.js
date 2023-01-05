@@ -39,9 +39,8 @@ const checkAuth = async (req, res, next) => {
 
 
     const verifyToken = (req, res, next) => {
-        console.log(colors.bgMagenta( req.header('auth-token')))
+        console.log(colors.bgMagenta(req.header('auth-token')))
         const token = req.header('auth-token')
-        console.log(colors.bgYellow(token))
 
         if (!token) return res.status(401).json({ error: 'Acceso denegado' })
 
