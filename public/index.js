@@ -44,3 +44,10 @@ const traerUsuarios = () => {
 }
 
 traerUsuarios();
+
+console.log(window.location.pathname)
+const getSesion = JSON.parse(localStorage.getItem('sesion'));
+
+if(getSesion && window.location.pathname === "/") {
+  window.location.assign(`/auth/${getSesion[1]}/index`)
+ }

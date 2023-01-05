@@ -75,7 +75,3 @@ sendToken()
 
 
 
-if(getSesion && window.location.pathname == "/") {
-  window.location.assign(`/auth/${sesion[1]}/index`)
- }
-
