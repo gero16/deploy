@@ -50,7 +50,7 @@ const indexPlantilla = async (req, res) => {
           //console.log(colors.bgBlue(arrayRegistros))
           if(user) {
 
-            res.status(200).header("auth-token", user.token_sesion).render("indexUser", {
+            res.status(200).render("indexUser", {
                 usuario: user.usuario,
                 correo: user.correo,
                 name: user.nombre,

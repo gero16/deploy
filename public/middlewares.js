@@ -47,6 +47,7 @@ if(logout) {
 const sendToken = async () => {
   const sesion =  JSON.parse(localStorage.getItem('sesion'));
   const token = sesion[2]
+  console.log(token)
 
   const settings = { 
       method: 'POST', 
