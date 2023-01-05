@@ -26,11 +26,13 @@ const loginUsuario = async (req, res) => {
         const tokenSesion = await generarJWT();
         console.log(tokenSesion)
         await usuario.save()
-        res.status(200).header("auth-token", tokenSesion).json({
-                usuario:  usuario.nombre,
-                correo: usuario.correo,
-                token: tokenSesion
-        })
+        if(tokenSesion){
+          res.status(200).header("auth-token", tokenSesion).json({
+            usuario:  usuario.nombre,
+            correo: usuario.correo,
+            token: tokenSesion
+    })}
+      
    
     } catch (error) {
 
