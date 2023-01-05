@@ -61,7 +61,7 @@ const sendToken = async () => {
       if(fetchResponse.ok === false){
          const data = await fetchResponse.json();
          console.log(data)
-         window.location.assign("/error/401")
+         //window.location.assign("/error/401")
       }
      
       console.log(data)
@@ -75,6 +75,6 @@ sendToken()
 
 
 if(getSesion && window.location.pathname == "/") {
-  window.location.assign(`/auth/${getSesion[1]}/index`)
+  window.location.assign(`/auth/${sesion[1]}/index`)
  }
 

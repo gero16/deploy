@@ -4,14 +4,13 @@ const colors = require('colors')
 
 const traerUsuarios = async (req, res) => {
     const registros = await Usuario.findAll()
-    console.log(registros)
+    //console.log( registros)
 }
 
 const loginUsuario = async (req, res) => {
 
     const { correo, password } = req.body;
 
-    console.log(req.body)
     
     try {
     
@@ -25,38 +24,14 @@ const loginUsuario = async (req, res) => {
         }
 
       const tokenSesion = await generarJWT();
-      console.log(tokenSesion)
-
-      if(usuario.sesion == false){
-            console.log("dale forro")
-             
              await usuario.save()
              res.status(200).header("auth-token", tokenSesion).json({
-                token: tokenSesion,
                 nombre:  usuario.nombre,
                 usuario:  usuario.nombre,
                 correo: usuario.correo,
-                rol: usuario.rol
+                token: tokenSesion
               })
-              //.redirect(`/auth/${usuario.usuario}/index`)
-        
-      } else {
-      
-              
-            await usuario.save()
-            
-            res.status(200).header("auth-token", tokenSesion).json({
-                token: tokenSesion,
-                usuario:  usuario.nombre,
-                correo: usuario.correo,
-                rol: usuario.rol
-              })
-         
-        
-    }
-      // Si no existe una sesion desde este navegador/cliente
    
-
     } catch (error) {
 
         console.log(error)
@@ -102,9 +77,26 @@ const indexPlantilla = async (req, res) => {
       }) 
 }
 
+const logoutUsuario = async (req, res) => {
+  console.log(colors.bgBlue(req.params))
+  const { user } = req.params
+
+  try {
+      const usuario = await Usuario.findOne({where: { usuario : user} });
+      console.log(usuario.id)
+
+
+      res.redirect("/")
+  } catch (error) {
+      console.log(error)
+  }
+  
+}
+
 module.exports = {
     traerUsuarios,
     loginUsuario,
     indexPlantilla,
-    validateToken
+    validateToken,
+    logoutUsuario
 }

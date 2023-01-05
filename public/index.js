@@ -29,11 +29,18 @@ if(btnLogin) {
         console.log(data)
               
         if(fetchResponse.status === 200){
-          window.location.assign(`/auth/${data.usuario}/index`)
           const dataSesion = [data.correo, data.usuario,  data.token]
           localStorage.setItem("sesion", JSON.stringify(dataSesion) );
+          window.location.assign(`/auth/${data.usuario}/index`)
         }
       })
       
 }
 
+const traerUsuarios = () => {
+  fetch('/auth')
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+}
+
+traerUsuarios();

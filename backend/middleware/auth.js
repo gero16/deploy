@@ -38,7 +38,6 @@ const checkAuth = async (req, res, next) => {
 }
 
 
-// middleware to validate token (rutas protegidas)
     const verifyToken = (req, res, next) => {
         console.log(colors.bgMagenta( req.header('auth-token')))
         const token = req.header('auth-token')
@@ -50,8 +49,6 @@ const checkAuth = async (req, res, next) => {
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
             req.body = token
-            console.log(colors.bgGreen(req.user))
-            console.log(colors.bgRed("token verificado!"))
             next() // continuamos
         } catch (error) {
             res.status(400).json({error: 'Token inválido'})

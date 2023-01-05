@@ -84,3 +84,23 @@ footer{
     display: flex;
     justify-content: space-around;
 }
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+#login {
+    text-align: center;
+    background-color: #100540;
+    color: white;
+    border: none;
+}
+#login:hover{
+    cursor: pointer;
+}
+
+a:hover {
+    cursor: pointer;
+}
